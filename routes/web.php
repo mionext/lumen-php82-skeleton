@@ -13,7 +13,12 @@
 |
 */
 
+use App\Services\CaptchaService;
 use Illuminate\Http\Request;
+
+$router->group(['middleware' => 'throttle:5:1'], function () use ($router) {
+    $router->get('captcha', fn(Request $request) => CaptchaService::get());
+});
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/', function (Request $request) use ($router) {

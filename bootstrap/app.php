@@ -82,6 +82,8 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'throttle' => App\Http\Middleware\ThrottleRequests::class,
+//    'throttle-redis' => App\Http\Middleware\ThrottleRequestsWithRedis::class
 ]);
 
 /*
@@ -101,8 +103,8 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 $app->environment(['development', 'testing', 'local'])
-    && class_exists('Flipbox\LumenGenerator\LumenGeneratorServiceProvider')
-    && $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+&& class_exists('Flipbox\LumenGenerator\LumenGeneratorServiceProvider')
+&& $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
