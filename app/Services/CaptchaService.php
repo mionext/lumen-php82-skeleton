@@ -29,8 +29,14 @@ class CaptchaService extends Service
      * @param string $scene
      * @return bool
      */
-    public static function verify(string $phrase, string $captcha): bool
+    public static function verify(?string $phrase, ?string $captcha): bool
     {
-        return Cache::get($phrase) == $captcha;
+        if (Cache::get($phrase) == $captcha) {
+            Cache::forget($phrase);
+
+            return true;
+        }
+
+        return false;
     }
 }

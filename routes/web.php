@@ -17,7 +17,9 @@ use App\Services\CaptchaService;
 use Illuminate\Http\Request;
 
 $router->group(['middleware' => 'throttle:660:1'], function () use ($router) {
-    $router->get('captcha', fn(Request $request) => CaptchaService::get(85, 28));
+    $router->get('captcha', fn(Request $request) => success(CaptchaService::get(85, 28)));
+
+    $router->post('auth/sign-in', 'AuthController@signIn');
 });
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
